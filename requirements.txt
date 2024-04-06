@@ -4,4 +4,3 @@ fastapi
 sqlalchemy
 uvicorn
 psycopg2
-pytesseract
