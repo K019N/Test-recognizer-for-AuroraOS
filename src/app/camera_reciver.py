@@ -1,12 +1,14 @@
 import cv2 as cv
 import numpy as np
-from server_client import *
 from image_processor import *
+from .recognising.text_recogniser import *
 
 
 class CameraReciver():
     def __init__(self):
         self.data_to_recive = {"number": ["x1", "x2", "y1", "y2"]}
+        self.text_recog = TextRecogniser()
+        #self.client = Client()
     
     #TODO: img counter, now not working anytime zero number ;(
     def take_picture(self, frame, img_counter):
@@ -25,7 +27,6 @@ class CameraReciver():
         line_counter = 0
         img_counter = 0
         #TODO: connection to real server? 
-        client = Client()
         while(True): 
             ret, frame = vid.read() 
             gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
@@ -40,7 +41,9 @@ class CameraReciver():
                 break
             elif key % 256 == 32:   #space
                 self.take_picture(frame, img_counter)
+            elif key % 256 == 0:
+                self.text_recog.recognise(frame)
 
-        client.send_data(self.data_to_recive)
+        #self.client.send_data(self.data_to_recive)
         vid.release() 
         cv.destroyAllWindows() 

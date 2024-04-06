@@ -1,15 +1,6 @@
 from sqlalchemy import Column, Table, Integer, String, JSON, ForeignKey
 from .database import Base
 
-'''
-class User(Base):
-    __tablename__ = "user"
-
-    id = Column(Integer, primary_key=True, index=True, nullable=False)
-    username = Column(String, index=True, nullable=False)
-    email = Column(String, index=True, nullable=False)
-    password = Column(String, index=True, nullable=False)     
-'''
 
 class Test(Base):
     __tablename__ = "test"
@@ -31,3 +22,29 @@ class Test(Base):
 
     def set_results(self, results):
         self.results = results
+
+
+class Result(Base):
+    __tablename__ = "result"
+
+    sending_id = Column(Integer, primary_key=True, index=True, nullable=False)
+    test_id = Column(Integer, ForeignKey("test.id"), nullable=False)
+    answers = Column(JSON, nullable=False)
+    #mark = Column(Integer, nullable=False)
+
+    def __init__(self, sending_id, test_id, answers):
+        self.answers = answers
+        self.test_id = test_id
+        self.sending_id = sending_id
+
+
+
+'''
+class User(Base):
+    __tablename__ = "user"
+
+    id = Column(Integer, primary_key=True, index=True, nullable=False)
+    username = Column(String, index=True, nullable=False)
+    email = Column(String, index=True, nullable=False)
+    password = Column(String, index=True, nullable=False)     
+'''
