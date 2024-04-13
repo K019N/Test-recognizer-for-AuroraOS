@@ -13,4 +13,7 @@ then install all needed bibles from **requirements.txt** by command:
 pip install -r requirements.txt
 ````
 
+**Also you need to download pytesseract.exe form this repository**
+[a link] https://github.com/UB-Mannheim/tesseract/wiki
+
 GOOD LUCK!
