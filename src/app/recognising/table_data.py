@@ -8,17 +8,16 @@ class Table():
         value = ''
         was_dash = False
         for i in range(len(some_data)):
-            print(was_dash, some_data[i])
             if some_data[i] == '-':
                 was_dash = True
             elif some_data[i] == '\n':
-                data[int(key.replace(" ", ""))] = value.replace(" ", "")
+                data[key.replace(" ", "")] = value.replace(" ", "")
                 key = ''
                 value = ''
                 was_dash = False
             elif was_dash: value += some_data[i] 
             else: key += some_data[i]
-        data[int(key.replace(" ", ""))] = value.replace(" ", "")
+        data[key.replace(" ", "")] = value.replace(" ", "")
         return data
     
     def get_value(self, key: int):

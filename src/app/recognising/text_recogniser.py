@@ -8,21 +8,18 @@ class TextRecogniser(IRecogniser):
         self.data = {}
     
     def recognise(self, img):
-        pytesseract.pytesseract.tesseract_cmd = 'System_path_to_tesseract.exe'
+        pytesseract.pytesseract.tesseract_cmd = "C:\Program Files\Tesseract-OCR\\tesseract.exe"
 
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        ret, thresh1 = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
-        rect_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (18, 18))
-        dilation = cv2.dilate(thresh1, rect_kernel, iterations = 1)
-        contours, hierarchy = cv2.findContours(dilation, cv2.RETR_EXTERNAL, 
-                                                        cv2.CHAIN_APPROX_NONE)
-        im2 = img.copy()
+        blur = cv2.GaussianBlur(gray, (3,3), 0)
+        thresh = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
 
-        for cnt in contours:
-            x, y, w, h = cv2.boundingRect(cnt)
-            rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            cropped = im2[y:y + h, x:x + w]
+        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
+        opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=1)
+        invert = 255 - opening
 
-            text = pytesseract.image_to_string(cropped)
-        
-        return text
+        data = pytesseract.image_to_string(invert, lang='eng', config='--psm 6')
+        return data
+    
+    def recognise_table(self, img):
+        pass

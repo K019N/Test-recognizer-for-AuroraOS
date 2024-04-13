@@ -1,10 +1,9 @@
-from abc import ABC, abstractproperty
 from table_data import *
 
 
 class IRecogniser():
     def __init__(self):
-        self.data = {}
+        self.data = Table("")
     
     def recognise(self, img):
         pass
@@ -13,4 +12,5 @@ class IRecogniser():
         self.data = Table(some_data)
 
     def get_data(self):
-        return self.data
+        return self.data.data
+    
