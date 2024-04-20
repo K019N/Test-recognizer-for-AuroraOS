@@ -1,10 +1,9 @@
-from fastapi import FastAPI, Depends
-from typing import List, Annotated
-from sqlalchemy.orm import Session
+from typing import Annotated, List
 
+from fastapi import Depends, FastAPI
 from models.database import engine, session_local
-from models.models import Test, Base
-
+from models.models import Base, Test
+from sqlalchemy.orm import Session
 
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
