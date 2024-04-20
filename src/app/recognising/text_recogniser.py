@@ -1,4 +1,4 @@
-from recogniser import IRecogniser
+from .recogniser import IRecogniser
 import cv2
 import pytesseract
 

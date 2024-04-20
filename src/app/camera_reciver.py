@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-from image_processor import *
+from .image_processor import *
 from .recognising.text_recogniser import *
 
 

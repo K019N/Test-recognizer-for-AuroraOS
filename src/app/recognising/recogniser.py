@@ -1,4 +1,4 @@
-from table_data import *
+from .table_data import *
 
 
 class IRecogniser():
