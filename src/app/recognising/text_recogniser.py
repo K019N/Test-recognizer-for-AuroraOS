@@ -1,6 +1,7 @@
-from recogniser import IRecogniser
 import cv2
 import pytesseract
+
+from .recogniser import IRecogniser
 
 
 class TextRecogniser(IRecogniser):

@@ -1,5 +1,6 @@
 import unittest
-from text_recogniser import *
+
+from .text_recogniser import *
 
 
 class RocogniserTesting(unittest.TestCase):
