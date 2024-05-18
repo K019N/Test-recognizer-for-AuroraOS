@@ -1,13 +1,14 @@
 import cv2 as cv
 import numpy as np
 from image_processor import *
-from .recognising.text_recogniser import *
+from recognising.table_recog import *
+from table_to_results import *
 
 
 class CameraReciver():
     def __init__(self):
         self.data_to_recive = {"number": ["x1", "x2", "y1", "y2"]}
-        self.text_recog = TextRecogniser()
+        self.text_recog = TableRecogniser()
         #self.client = Client()
     
     #TODO: img counter, now not working anytime zero number ;(
@@ -16,6 +17,7 @@ class CameraReciver():
         cv.imwrite(img_name, frame)
         print("{} written!".format(img_name))
         img_counter += 1
+        return img_name
 
     def exists_device(self, cap):
         if cap is None or not cap.isOpened():
@@ -40,7 +42,10 @@ class CameraReciver():
             if key % 256 == 27:   #esc 
                 break
             elif key % 256 == 32:   #space
-                self.take_picture(frame, img_counter)
+                pic_name = self.take_picture(frame, img_counter)
+                recog = TableRecogniser()
+                table = recog.recognise(pic_name)
+                print(Resulter().make_results(table))
             elif key % 256 == 0:
                 self.text_recog.recognise(frame)
 
