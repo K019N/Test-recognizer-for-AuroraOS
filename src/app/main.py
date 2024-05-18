@@ -1,6 +1,7 @@
 import cv2 as cv
 import numpy as np
-from camera_reciver import *
+
+from .camera_reciver import *
 
 #TODO: buttons not working now
 #def back_button(*args):

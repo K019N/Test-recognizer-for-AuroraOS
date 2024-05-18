@@ -1,7 +1,7 @@
-opencv-python
-numpy
-fastapi
-sqlalchemy
-uvicorn
-psycopg2
-pytesseract
+opencv-python==4.9.0.80
+numpy==1.26.0
+fastapi==0.110.1
+SQLAlchemy==2.0.29
+uvicorn==0.29.0
+psycopg2==2.9.9
+pytesseract==0.3.10

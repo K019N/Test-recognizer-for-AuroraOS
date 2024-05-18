@@ -2,6 +2,8 @@ import cv2
 import pytesseract
 from table_data import *
 
+from .recogniser import IRecogniser
+
 
 class IRecogniser():
     def __init__(self):
