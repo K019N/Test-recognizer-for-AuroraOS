@@ -8,15 +8,15 @@ from PIL import Image
 
 
 class TableRecogniser:
-    def has_non_white_color(self, image) -> str:
+    def has_non_white_color(self, image, color=200) -> str:
         if image is None:
             print("Ошибка: Изображение не может быть None")
             return ""
 
-        rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        
-        non_white_mask = np.any(rgb_image != [255, 255, 255], axis=-1)
-        if np.any(non_white_mask): return "+"
+        white_mask = np.all(image >= color, axis=-1)
+        non_white_mask = ~white_mask
+        if np.all(white_mask): return ""
+        return "+"
 
     def recognise(self, path):
         img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
@@ -153,6 +153,6 @@ class TableRecogniser:
 
 
 #opn file
-file2 = "src/app/recognising/123.jpg"
+file2 = "src/app/recognising/5.jpg"
 file1 = "src/app/recognising/122.png"
-#TableRecogniser().recognise(file2)
+TableRecogniser().recognise(file2)

@@ -1,6 +1,6 @@
 import cv2
 import pytesseract
-from table_data import *
+from recognising.table_data import *
 
 from .recogniser import IRecogniser
 

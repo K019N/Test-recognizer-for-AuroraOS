@@ -5,11 +5,18 @@ class Resulter():
         pass
 
     def make_results(self, table) -> list[str]:
-        res = []
-        if table:
-            for j in range(table):
-                for i in range(table[j]):
-                    if all(table[j][i] == "+", i != 0):
-                        res.append(f"{j} - {i}")
+        res = {}
+        if any(table):
+            for j in range(len(table)):
+                for i in range(len(table[j])):
+                    if all((table[j][i] == "+", i != 0)):
+                        res[j] = i
         return res
 
+    def compare(self, results, answers):
+        mark = 0
+        for i in results:
+            if results[i] == answers[i]:
+                mark += 1
+        return mark
+        
