@@ -31,7 +31,6 @@ class CameraReciver():
     def runCamera(self, vid):
         line_counter = 0
         img_counter = 0
-        #TODO: connection to real server? 
         while(True): 
             ret, frame = vid.read() 
             gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
@@ -44,7 +43,7 @@ class CameraReciver():
             key = cv.waitKey(1)
             if key % 256 == 27:   #esc 
                 break
-            
+
             elif key % 256 == 32:   #space
                 pic = self.take_picture(frame, img_counter)
                 data = TableRecogniser().recognise(pic)
